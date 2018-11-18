@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "id": 100,
+      "contactInfo": {
+        "firstName": "Julius",
+        "lastName": "Hibbert",
+        "email": "hibbert@notablehealth.com"
+      },
+      "appointments":[
+        {
+          "id":1,
+          "type": "New Patient",
+          "time": "8:00AM",
+          "name": "Sterling Archer"
+        },
+        {
+          "id":2,
+          "type": "Follow Up",
+          "time": "8:30AM",
+          "name": "Cyril Figis"
+        },
+        {
+          "id":3,
+          "type": "Follow Up",
+          "time": "9:00AM",
+          "name": "Ray Gilette"
+        },
+        {
+          "id":4,
+          "type": "New Patient",
+          "time": "9:30AM",
+          "name": "Lana Kane"
+        },
+        {
+          "id":5,
+          "type": "New Patient",
+          "time": "10:00AM",
+          "name": "Pam Poovey"
+        }
+      ]
+    },
+    {
+      "id": 101,
+      "contactInfo": {
+        "firstName": "Algernop",
+      "lastName": "Krieger",
+      "email": "krieger@notablehealth.com"
+      }
+    },
+    {
+      "id": 102,
+      "contactInfo": {
+        "firstName": "Nick",
+        "lastName": "Riviera",
+        "email": "riveiera@notablehealth.com"
+      }
+    }
+  ]
+}
