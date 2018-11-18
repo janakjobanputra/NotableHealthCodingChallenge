@@ -6,7 +6,7 @@ $warning-color: #E75753;
 
 
 // VARIABLES
-$left-sidenav-width: 110px;
+$left-sidenav-width: 20%;
 $widget-height: 310px;
 $font-weight-bold: 600;
 $font-size-large: 22px;
@@ -19,6 +19,16 @@ body {
 
 .toolbar-button {
   min-width: 20px;
+}
+
+.align-center{
+  text-align:center !important;
+}
+.align-left{
+  text-align:left !important;
+}
+.align-right{
+  text-align:right !important;
 }
 
 .share-label {
