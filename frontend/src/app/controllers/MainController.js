@@ -3,13 +3,13 @@
   angular
 	   .module('app')
 	   .controller('MainController', [
-		  'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', '$mdToast',
+		  'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', '$mdToast', '$http',
 		  MainController
 	   ]);
 
-  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast) {
+  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast, $http) {
 	var vm = this;
-
+	initPhysicians();
 	vm.menuItems = [ ];
 	vm.selectItem = selectItem;
 	vm.toggleItemsList = toggleItemsList;
@@ -19,67 +19,39 @@
 	vm.toggleRightSidebar = toggleRightSidebar;
 	vm.toggleRightSidebar = toggleLeftSidebar;
 
-	vm.physicianList = [
-	  {
-			id: 100,
-			contactInfo: {
-				firstName: "Julius",
-				lastName: "Hibbert",
-				email: "hibbert@notablehealth.com"
-			}
-	  },
-	  {
-			id: 101,
-			contactInfo: {
-				firstName: "Algernop",
-			lastName: "Krieger",
-			email: "krieger@notablehealth.com"
-			}
-	  },
-	  {
-			id: 102,
-			contactInfo: {
-				firstName: "Nick",
-				lastName: "Riviera",
-				email: "riveiera@notablehealth.com"
-			}
-	  }
-	]
+	vm.physicianList = []
+	vm.currentPhys = {}
+	vm.apptList = []
 
-	vm.currentPhys = vm.physicianList[0]
+	vm.selectPhysician = function(phys) {
+		vm.currentPhys = phys
+		vm.apptList=[]
+		console.log("new physician", phys)
+		initAppointments()
+	}
 
-	vm.apptList = [
-		{
-			id:1,
-			type: "New Patient",
-			time: "8:00AM",
-			name: "Sterling Archer"
-		},
-		{
-			id:2,
-			type: "Follow Up",
-			time: "8:30AM",
-			name: "Cyril Figis"
-		},
-		{
-			id:3,
-			type: "Follow Up",
-			time: "9:00AM",
-			name: "Ray Gilette"
-		},
-		{
-			id:4,
-			type: "New Patient",
-			time: "9:30AM",
-			name: "Lana Kane"
-		},
-		{
-			id:5,
-			type: "New Patient",
-			time: "10:00AM",
-			name: "Pam Poovey"
-		}
-	]
+	function initPhysicians() {
+		console.log("initPhysicians")
+		$http({
+			method:"GET",
+			url:"http://0.0.0.0:5000/getPhysicians"
+		}).then(function(response) {
+				console.log("response", response)
+				vm.physicianList = response["data"]["data"]
+				vm.currentPhys = vm.physicianList[0];
+				initAppointments()
+			});
+	}
+
+	function initAppointments(){
+		$http({
+			method:"GET",
+			url:"http://0.0.0.0:5000/getAppointments/"+vm.currentPhys["id"]
+		}).then(function(response) {
+				console.log("response", response)
+				vm.apptList = response["data"]["appointmentList"]
+			});
+	}
 
 	navService
 	  .loadAllItems()
