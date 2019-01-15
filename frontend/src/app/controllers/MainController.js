@@ -25,7 +25,7 @@
 
 	vm.selectPhysician = function(phys) {
 		vm.currentPhys = phys
-		vm.apptList=[]
+		vm.apptList=
 		console.log("new physician", phys)
 		initAppointments()
 	}
